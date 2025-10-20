@@ -126,7 +126,7 @@ const Edit =(index)=>{
     <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto bg-gray-50'>
     <h1 className='lg:text-2xl md:text-xl sm:text-lg font-semibold text-emerald-600 font-serif'>Appointmnets</h1>
     <div className='overflow-x-auto'>
-    <table className='min-w-full mt-5 border-separate border-2 border-gray-400 md:table-auto sm: col-span-2 '> 
+    <table className='min-w-full mt-5 border-separate border-2 border-emerald-600 md:table-auto sm: col-span-2 '> 
         <thead>
             <tr className='border-2 border-gray-500'>
                 <th className='border border-gray-300 px-4 py-2 text-xl'>Name</th>
