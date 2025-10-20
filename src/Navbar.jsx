@@ -11,7 +11,7 @@ return (
     <nav className="bg-emerald-500 shadow-2xl rounded-b-xl fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-2xl md:text-3xl font-serif text-white">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white ">
           Appointment Manager
         </h1>
 
