@@ -8,7 +8,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen)
 
 return (
-    <nav className="bg-emerald-500 shadow-2xl rounded-b-xl fixed w-full z-50">
+    <nav className="bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 shadow-2xl rounded-b-xl fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white ">
@@ -17,7 +17,7 @@ return (
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-8 text-lg text-white font-serif">
-          <Link to="/" className="hover:text-gray-200 transition">
+          <Link to="/" className="hover:text-gray-200 transition ">
             Home
           </Link>
           <Link to="/my-appointments" className="hover:text-gray-200 transition">

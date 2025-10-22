@@ -80,40 +80,40 @@ const Edit =(index)=>{
   return (
     <>
     <div className='flex justify-center w-full '>
-      <div className='bg-gray-50 lg:w-120 md:w-100 sm:w-80 mt-25  px-10 py-4 rounded-2xl shadow-xl/30 mb-5 flex justify-center '>
+      <div className='bg-orange-50 lg:w-120 md:w-100 sm:w-80 mt-25  px-10 py-4 rounded-2xl shadow-xl/30 mb-5 flex justify-center hover:shadow-emerald-500/100 transition-all hover:scale-101 '>
         <form onSubmit={handleSubmit}>
           <h1 className='text-center text-emerald-600 font-serif text-xl md:text-2xl lg:2xl'>Book Appointment </h1>
-          <div className='mt-3'>
-            <label>Enter Your Name</label>
+          <div className='mt-5'>
+            {/* <label>Enter Your Name</label> */}
             <div>
-              <input type='text' name='name' placeholder='eg:amit' value={data.name} onChange={handleChange} className='border rounded-lg lg:w-100 md:w-80 sm:w-50 px-2 py-1  focus:border-emerald-400   outline-none ' required autoComplete='off'></input>
+              <input type='text' name='name' placeholder='Your Name' value={data.name} onChange={handleChange} className='  border-none shadow-inner pl-5 rounded-2xl lg:w-100 md:w-80 sm:w-50 px-2 py-2  focus:ring focus:ring-emerald-400   focus:outline-none focus:bg-cyan-50  ' required autoComplete='off'></input>
             </div></div>
 
 
-          <div className='mt-3'>
-            <label>Select Service</label>
+          <div className='mt-5'>
+            {/* <label>Select Service</label> */}
             <div>
-              <input type='text' name='service' value={data.service} onChange={handleChange} placeholder='eg:haircut,gym,doctor,etc'  className='border-1 rounded-lg lg:w-100 md:w-80 sm:w-50 px-2 py-1 focus:border-emerald-400   outline-none' required autoComplete='off'></input>
+              <input type='text' name='service' value={data.service} onChange={handleChange} placeholder='eg:haircut,gym,doctor,etc'  className='border-none rounded-2xl lg:w-100 md:w-80 sm:w-50 px-2 py-2  pl-5 shadow-inner focus:ring focus:ring-emerald-400   focus:outline-none focus:bg-cyan-50 ' required autoComplete='off'></input>
             </div></div>
 
 
-          <div className='mt-3'>
-            <label>Select Date</label>
+          <div className='mt-5'>
+            {/* <label>Select Date</label> */}
             <div>
-              <input type='date' name='date' value={data.date} onChange={handleChange} className='  border rounded-lg border-black  w-full  px-2 py-1 focus:border-emerald-400   outline-none ' required></input>
+              <input type='date' name='date' value={data.date} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-5 w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' required></input>
             </div>
             </div>
 
-          <div className='mt-3'>
-            <label>Select Time</label>
+          <div className='mt-5'>
+            {/* <label>Select Time</label> */}
            <div className='w-full'>
-              <input type='time' name='time' value={data.time} onChange={handleChange} className='  border rounded-lg border-black w-full  px-2 py-1 focus:border-emerald-400   outline-none ' required></input>
+              <input type='time' name='time' value={data.time} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-8 w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' required></input>
           </div>
           </div>
 
 
           <div className='flex justify-center mt-3'>
-          <button type='submit'  className='bg-emerald-700 text-white font-semibold px-2 py-2 rounded-2xl  mt-3 w-full  hover:bg-emerald-600 hover:text-lg'>{editIndex !== null ?"Update Appointment" : "Save Appointment"}</button>
+          <button type='submit'  className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 text-white font-semibold px-2 py-2 rounded-2xl shadow-md  mt-3 w-full  hover:from-green-500 hover:to-emerald-600 transition-all hover:shadow-emerald-400/50 hover:scale-105'>{editIndex !== null ?"Update Appointment" : "Save Appointment"}</button>
           
             </div>
 
@@ -123,9 +123,9 @@ const Edit =(index)=>{
      
 
     </div>
-    <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto bg-gray-50'>
-    <h1 className='lg:text-2xl md:text-xl sm:text-lg font-semibold text-emerald-600 font-serif'>Appointmnets</h1>
-    <div className='overflow-x-auto'>
+    <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto '>
+    <h1 className='lg:text-2xl md:text-xl sm:text-lg font-semibold text-emerald-600 font-serif text-center'>Appointmnets</h1>
+    {/* <div className='overflow-x-auto'>
     <table className='min-w-full mt-5 border-separate border-2 border-emerald-600 md:table-auto sm: col-span-2 '> 
         <thead>
             <tr className='border-2 border-gray-500'>
@@ -157,7 +157,20 @@ const Edit =(index)=>{
         </tbody>
     </table>
 
-    </div>
+    </div> */}<div className='flex justify-center flex-wrap gap-5 mt-5'>
+    {Appointment.map((app, index) => (
+      <div key={index} className='border-2 w-50 h-50 bg-gray-50 border-emerald-400 rounded-2xl shadow-md p-4 my-4 hover:shadow-emerald-400/50 transition-all text-center hover:scale-105'>
+        <h2 className='font-serif font-semibold text-emerald-600 lg:text-xl md:text-lg sm:text-md'>Name: {app.name}</h2>
+        <p className='font-serif '>Service: {app.service}</p>
+        <p className='font-serif '>Date: {app.date}</p>
+        <p className='font-serif '>Time: {app.time}</p>
+        <div className='flex justify-center gap-4 mt-2'>
+        <button className='bg-red-500 text-white font-semibold px-3 py-1 rounded-2xl hover:bg-red-700'onClick={()=>Delete(index)}>Delete</button>
+        <button className=' bg-emerald-600 text-white font-semibold px-4 py-1 rounded-2xl hover:bg-emerald-400' onClick={()=>Edit(index)}>Edit</button>
+        </div>
+      </div>
+    ))}
+</div>
 </div>
 <ToastContainer autoClose={2000} theme='dark' transition={Slide} />
     </>
