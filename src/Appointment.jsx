@@ -100,14 +100,14 @@ const Edit =(index)=>{
           <div className='mt-5'>
             {/* <label>Select Date</label> */}
             <div>
-              <input type='date' name='date' value={data.date} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-5 w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' required></input>
+              <input type='date' name='date' value={data.date} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-5 w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' required placeholder='date'></input>
             </div>
             </div>
 
           <div className='mt-5'>
             {/* <label>Select Time</label> */}
            <div className='w-full'>
-              <input type='time' name='time' value={data.time} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-8 w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' required></input>
+              <input type='time' name='time' value={data.time} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-8 w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' placeholder='time' required></input>
           </div>
           </div>
 
