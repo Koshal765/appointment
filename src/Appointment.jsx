@@ -52,6 +52,10 @@ const Appointment = () => {
     }
     
     reset();
+    
+    const section = document.getElementById('appointments');
+    section.scrollIntoView({ behavior: 'smooth' });
+
   }
 
   const Delete = (index)=>{
@@ -123,8 +127,8 @@ const Edit =(index)=>{
      
 
     </div>
-    <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto '>
-    <h1 className='lg:text-2xl md:text-xl sm:text-lg font-semibold text-emerald-600 font-serif text-center'>Appointmnets</h1>
+    <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto ' id='appointments'>
+    <h1 className='lg:text-2xl md:text-xl sm:text-lg font-semibold text-emerald-600 font-serif text-center'>Appointments</h1>
     {/* <div className='overflow-x-auto'>
     <table className='min-w-full mt-5 border-separate border-2 border-emerald-600 md:table-auto sm: col-span-2 '> 
         <thead>
@@ -159,12 +163,12 @@ const Edit =(index)=>{
 
     </div> */}<div className='flex justify-center flex-wrap gap-5 mt-5'>
     {Appointment.map((app, index) => (
-      <div key={index} className='border-2 w-50 h-50 bg-gray-50 border-emerald-400 rounded-2xl shadow-md p-4 my-4 hover:shadow-emerald-400/50 transition-all text-center hover:scale-105'>
-        <h2 className='font-serif font-semibold text-emerald-600 lg:text-xl md:text-lg sm:text-md'>Name: {app.name}</h2>
-        <p className='font-serif '>Service: {app.service}</p>
-        <p className='font-serif '>Date: {app.date}</p>
-        <p className='font-serif '>Time: {app.time}</p>
-        <div className='flex justify-center gap-4 mt-2'>
+      <div key={index} className='border-2 w-75 h-auto bg-gray-50 border-emerald-400 rounded-2xl shadow-md p-5 my-4 hover:shadow-emerald-400/50 transition-all text-start hover:scale-105'>
+        <h2 className='font-serif font-semibold text-emerald-600 lg:text-3xl md:text-lg sm:text-md py-2'> {app.name}</h2>
+        <p className='font-serif lg:text-lg md:text-lg sm:text-md  '>Service: {app.service}</p>
+        <p className='font-serif lg:text-lg md:text-lg sm:text-md '>Date: {app.date}</p>
+        <p className='font-serif lg:text-lg md:text-lg sm:text-md '>Time: {app.time}</p>
+        <div className='flex justify-start gap-4 mt-2 '>
         <button className='bg-red-500 text-white font-semibold px-3 py-1 rounded-2xl hover:bg-red-700'onClick={()=>Delete(index)}>Delete</button>
         <button className=' bg-emerald-600 text-white font-semibold px-4 py-1 rounded-2xl hover:bg-emerald-400' onClick={()=>Edit(index)}>Edit</button>
         </div>
