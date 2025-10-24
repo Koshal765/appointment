@@ -1,16 +1,29 @@
 import React, { useState } from 'react'
 
 const Login = () => {
+  const[isLogin,setIsLogin] = useState(true);
   const[user,setUser]=useState({
     username:'',
     password:""
   })
+
+  
 
 const handleChange =(e)=>{
   setUser({...user,[e.target.name]:e.target.value})
 }
 const handleSubmit=(e)=>{
   e.preventDefault();
+  const userdata = JSON.parse(localStorage.getItem("users")) || [];
+  const matchedUser = userdata.find(u => u.username === user.username && u.password === user.password);
+  if(matchedUser){
+    alert("Login Successful");
+  }
+  else{
+    alert("Invalid Credentials");
+  }
+
+
   
   console.log(user);
 }
@@ -18,13 +31,14 @@ const handleSubmit=(e)=>{
   return (
     <>
     <div className='min-h-screen  w-full pt-20 flex justify-center  '>
+      {isLogin ?  <>
     <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-75 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
       <form onSubmit={handleSubmit} className='px-3 mt-5'>
         <h1 className='text-center font-serif text-emerald-500 text-3xl mt-5'>Login</h1>
    
           {/* <label className='font-serif'>Username</label> */}
           <div className='mt-10'>
-            <input name='username' type='text' value={user.username} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1 ' placeholder='Username'></input>
+            <input name='username' type='text' value={user.username} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1 ' placeholder='Username or email'></input>
           </div>
        
          
@@ -33,14 +47,44 @@ const handleSubmit=(e)=>{
             <input name='password' type='password' value={user.password} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1' placeholder='password'></input>
           </div>
         
-        <div className='mt-3'>
-     <h1 className='text-md text-blue-500 hover:text-blue-700'>Create Account ?</h1>
-        </div>
+       
         <div className='flex justify-center mt-8'>
           <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full w-full text-white ' type='submit'>Login</button>
           </div>
+           <div className='mt-5 w-full  flex items-center'>
+     <p className='text-md'>Create Account ?</p><span className=' text-blue-500 hover:text-blue-700'> <a href='#' onClick={()=>setIsLogin(false)} className='cursor-pointer text-md'>Sign Up</a></span>
+        </div>
       </form>
-      </div></div>
+      </div>
+      </>:<>
+       <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-75 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
+      <form onSubmit={handleSubmit} className='px-3 mt-5'>
+        <h1 className='text-center font-serif text-emerald-500 text-3xl mt-5'>Sign Up</h1>
+   
+          {/* <label className='font-serif'>Username</label> */}
+          <div className='mt-10'>
+            <input name='username' type='text' value={user.username} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1 ' placeholder='Username or email'></input>
+          </div>
+       
+         
+          {/* <label className=' font-serif'>Password</label> */}
+          <div className='mt-5'>
+            <input name='password' type='password' value={user.password} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1' placeholder='password'></input>
+          </div>
+        
+  
+        <div className='flex justify-center mt-8'>
+          <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full w-full text-white ' type='submit'>Sign Up</button>
+          </div>
+                <div className='mt-5 w-full  flex justify-center items-center'>
+ <p className='text-md'>Have an Account?</p><span className=' text-blue-500 hover:text-blue-700'> <a href='#' onClick={()=>setIsLogin(true)} className='cursor-pointer text-md'>Login</a></span>
+        </div>
+      </form>
+
+      </div>
+      
+      </>}
+      </div>
     </>
   )
 }

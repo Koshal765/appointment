@@ -8,6 +8,7 @@ import MyAppointments from './MyAppointments.jsx'
 import Login from './Login.jsx'
 
 
+
 const appRouter = createBrowserRouter([
   {
     path:'/',
@@ -23,7 +24,9 @@ const appRouter = createBrowserRouter([
   {
     path:'/my-appointments',
     element:<MyAppointments/>
-  }]
+  }
+
+  ]
   }
 ])
 createRoot(document.getElementById('root')).render(
