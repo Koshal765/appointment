@@ -18,26 +18,26 @@ const handleSubmit=(e)=>{
   return (
     <>
     <div className='min-h-screen  w-full pt-20 flex justify-center  '>
-    <div className='border-emerald-400  border  rounded-2xl shadow-2xl w-100 h-75 flex justify-center items-center mt-15'>
-      <form onSubmit={handleSubmit} className='px-3 '>
-        <h1 className='text-center font-serif text-emerald-500'>Login</h1>
-        <div>
-          <label className='font-serif'>Username</label>
-          <div>
-            <input name='username' type='text' value={user.username} onChange={handleChange} required autoComplete='off' className='border rounded-xl  focus:border-emerald-400   outline-none px-2 '></input>
+    <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-75 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
+      <form onSubmit={handleSubmit} className='px-3 mt-5'>
+        <h1 className='text-center font-serif text-emerald-500 text-3xl mt-5'>Login</h1>
+   
+          {/* <label className='font-serif'>Username</label> */}
+          <div className='mt-10'>
+            <input name='username' type='text' value={user.username} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1 ' placeholder='Username'></input>
           </div>
-        </div>
-         <div>
-          <label className=' font-serif'>Password</label>
-          <div>
-            <input name='password' type='password' value={user.password} onChange={handleChange} required autoComplete='off' className='border rounded-xl  focus:border-emerald-400   outline-none px-2 '></input>
+       
+         
+          {/* <label className=' font-serif'>Password</label> */}
+          <div className='mt-5'>
+            <input name='password' type='password' value={user.password} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1' placeholder='password'></input>
           </div>
+        
+        <div className='mt-3'>
+     <h1 className='text-md text-blue-500 hover:text-blue-700'>Create Account ?</h1>
         </div>
-        <div>
-     <h1>Create Account ?</h1>
-        </div>
-        <div className='flex justify-center'>
-          <button className='bg-emerald-600 px-4 py-1 font-serif text-center rounded-2xl text-white ' type='submit'>Login</button>
+        <div className='flex justify-center mt-8'>
+          <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full w-full text-white ' type='submit'>Login</button>
           </div>
       </form>
       </div></div>

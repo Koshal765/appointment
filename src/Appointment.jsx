@@ -84,7 +84,7 @@ const Edit =(index)=>{
   return (
     <>
     <div className='flex justify-center w-full '>
-      <div className='bg-orange-50 lg:w-120 md:w-100 sm:w-80 mt-25  px-10 py-4 rounded-2xl shadow-xl/30 mb-5 flex justify-center hover:shadow-emerald-500/100 transition-all hover:scale-101 '>
+      <div className='bg-orange-50 lg:w-120 md:w-100 sm:w-80 mt-25  px-10 py-4 rounded-2xl shadow-2xl mb-5 flex justify-center hover:shadow-emerald-500/100 transition-all hover:scale-101 '>
         <form onSubmit={handleSubmit}>
           <h1 className='text-center text-emerald-600 font-serif text-xl md:text-2xl lg:2xl'>Book Appointment </h1>
           <div className='mt-5'>
@@ -163,7 +163,7 @@ const Edit =(index)=>{
 
     </div> */}<div className='flex justify-center flex-wrap gap-5 mt-5'>
     {Appointment.map((app, index) => (
-      <div key={index} className='border-2 w-75 h-auto bg-gray-50 border-emerald-400 rounded-2xl shadow-md p-5 my-4 hover:shadow-emerald-400/50 transition-all text-start hover:scale-105'>
+      <div key={index} className='border-2 w-75 h-auto bg-gray-50 border-emerald-400 rounded-2xl shadow-lg p-5 my-4 hover:shadow-emerald-400/50 transition-all text-start hover:scale-105'>
         <h2 className='font-serif font-semibold text-emerald-600 lg:text-3xl md:text-lg sm:text-md py-2'> {app.name}</h2>
         <p className='font-serif lg:text-lg md:text-lg sm:text-md  '>Service: {app.service}</p>
         <p className='font-serif lg:text-lg md:text-lg sm:text-md '>Date: {app.date}</p>
