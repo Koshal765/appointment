@@ -29,7 +29,8 @@ const handleSubmit=(e)=>{
       title: "Login Successful!",
       text: `Welcome ${matchedUser.username}!`,
       icon: "success",
-      confirmButtonColor: "#10b981" // emerald color
+      confirmButtonColor: "#10b981", // emerald color
+      theme: "dark"
     });
     navigate('/');
   }
@@ -48,7 +49,9 @@ const handleSubmit=(e)=>{
       title: "Signup Successful!",
       text: "You can now login.",
       icon: "success",
-      confirmButtonColor: "#10b981"
+      confirmButtonColor: "#10b981",
+      theme: "dark"
+      
     });
       setIsLogin(true);
     }
