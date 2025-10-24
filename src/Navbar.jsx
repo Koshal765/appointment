@@ -40,7 +40,7 @@ return (
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden  bg-gray-200  shadow-lg rounded-b-xl">
-          <ul className="flex flex-col items-center py-4 space-y-4 text-lg text-emerald-500 font-serif">
+          <ul className="flex flex-col items-center py-4 space-y-4 text-md text-emerald-500 font-serif">
             <li>
               <Link
                 to="/"
