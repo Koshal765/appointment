@@ -93,7 +93,7 @@ const changeform =()=>{
           {/* <label className=' font-serif'>Password</label> */}
           <div className='mt-5'>
             <div className='flex items-center border rounded-full focus-within:border-emerald-400 outline-none justify-around'>
-            <input name='password' type={showpass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full  px-3 py-1' placeholder='password'></input>
+            <input name='password' type={showpass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none  px-3 py-1' placeholder='password'></input>
            <span onClick={handleClick} className='mr-2'>{showpass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
           </div></div>
         
