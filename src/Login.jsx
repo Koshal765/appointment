@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import { toast, ToastContainer,Slide} from 'react-toastify';
 import Swal from 'sweetalert2';
+import { IoEye } from "react-icons/io5";
+import { IoEyeOff } from "react-icons/io5";
 
 const Login = () => {
   const[isLogin,setIsLogin] = useState(false);
@@ -10,7 +12,15 @@ const Login = () => {
     password:""
   })
 
+  const reset =()=>{
+    setUser({
+      username:'',
+      password:''
+    })
+  }
+
   const[showpass,setShowPass] = useState(true);
+  const handleClick =()=>setShowPass(!showpass);
 
 
   const notify = () =>toast.info("Username Already Exists")
@@ -61,6 +71,11 @@ setUser({username:'' , password:''});
   console.log(user);
 };
 
+const changeform =()=>{
+  setIsLogin(!isLogin)
+  reset();
+}
+
   return (
     <>
     <div className='min-h-screen  w-full pt-20 flex justify-center  '>
@@ -77,15 +92,17 @@ setUser({username:'' , password:''});
          
           {/* <label className=' font-serif'>Password</label> */}
           <div className='mt-5'>
-            <input name='password' type='text' value={user.password} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1' placeholder='password'></input>
-          </div>
+            <div className='flex items-center border rounded-full hover:border-emerald-400 outline-none justify-around'>
+            <input name='password' type={showpass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none px-3 py-1' placeholder='password'></input>
+           <span onClick={handleClick} className='mr-2'>{showpass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
+          </div></div>
         
        
         <div className='flex justify-center mt-8'>
-          <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full w-full text-white ' type='submit'>Login</button>
+          <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full w-full text-white  hover:from-green-500 hover:to-emerald-600  ' type='submit'>Login</button>
           </div>
            <div className='mt-5 w-full  flex items-center justify-center gap-1'>
-     <p className='text-md'>Create Account?</p><span className=' text-blue-500 hover:text-blue-700'> <a href='#' onClick={()=>setIsLogin(false)} className='cursor-pointer text-sm'>Sign Up</a></span>
+     <p className='text-md'>Create Account?</p><span className=' text-blue-500 hover:text-blue-700'> <a href='#' onClick={changeform} className='cursor-pointer text-sm'>Sign Up</a></span>
         </div>
       </form>
       </div>
@@ -101,16 +118,18 @@ setUser({username:'' , password:''});
        
          
           {/* <label className=' font-serif'>Password</label> */}
-          <div className='mt-5'>
-            <input name='password' type='password' value={user.password} onChange={handleChange} required autoComplete='off' className='border rounded-full w-full focus:border-emerald-400   outline-none px-3 py-1' placeholder='password'></input>
-          </div>
+         <div className='mt-5'>
+            <div className='flex items-center border rounded-full hover:border-emerald-400 outline-none justify-around'>
+            <input name='password' type={showpass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none px-3 py-1' placeholder='password'></input>
+           <span onClick={handleClick} className='mr-2'>{showpass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
+          </div></div>
         
   
         <div className='flex justify-center mt-8'>
-          <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full w-full text-white ' type='submit'>Sign Up</button>
+          <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full w-full text-white  hover:from-green-500 hover:to-emerald-600 ' type='submit'>Sign Up</button>
           </div>
                 <div className='mt-5 w-full  flex justify-center items-center gap-1'>
- <p className='text-md'>Have an Account?</p><span className=' text-blue-500 hover:text-blue-700'> <a href='#' onClick={()=>setIsLogin(true)} className='cursor-pointer text-md'>Login</a></span>
+ <p className='text-md'>Have an Account?</p><span className=' text-blue-500 hover:text-blue-700'> <a href='#' onClick={changeform} className='cursor-pointer text-md'>Login</a></span>
         </div>
       </form>
 
