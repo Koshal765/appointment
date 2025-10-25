@@ -23,7 +23,8 @@ const Login = () => {
   const handleClick =()=>setShowPass(!showpass);
 
 
-  const notify = () =>toast.info("Username Already Exists")
+  const notify = () =>toast.info("Username Already Exists ! Redirecting to Login ")
+   const lognotify = () =>toast.info("Please Login ")
   const navigate = useNavigate()
 
 const handleChange =(e)=>{
@@ -51,6 +52,9 @@ const handleSubmit=(e)=>{
     const exists = userdata.some((u)=>u.username=== user.username);
     if(exists){
       notify()
+      
+      setTimeout(()=>{redirecting();},2500);
+     
     }
     else{
       userdata.push(user)
@@ -74,6 +78,12 @@ setUser({username:'' , password:''});
 const changeform =()=>{
   setIsLogin(!isLogin)
   reset();
+}
+
+const redirecting =()=>{
+  setIsLogin(!isLogin)
+  lognotify();
+  
 }
 
   return (
