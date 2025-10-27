@@ -79,6 +79,15 @@ return (
             </li>
             <li>
               <Link
+                to="/book-appointment"
+                onClick={() => setIsOpen(false)}
+                className="hover:text-gray-200"
+              >
+                Book Appointments
+              </Link>
+            </li>
+             <li>
+              <Link
                 to="/my-appointments"
                 onClick={() => setIsOpen(false)}
                 className="hover:text-gray-200"
@@ -86,6 +95,8 @@ return (
                 My Appointments
               </Link>
             </li>
+
+
             <li>
               <Link
                 to="/login"
