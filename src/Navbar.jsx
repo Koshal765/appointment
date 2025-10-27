@@ -11,14 +11,17 @@ return (
     <nav className="bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 shadow-2xl rounded-b-xl fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white ">
-          Appointment Manager
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white "><Link to="/">   Appointment Scheduler</Link>
+       
         </h1>
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-8 text-lg text-white font-serif">
-          <Link to="/" className="hover:text-gray-200 transition ">
-            Home
+         
+         <Link to="/" className="hover:text-gray-200 transition ">Home</Link>
+
+          <Link to="/book-appointment" className="hover:text-gray-200 transition ">
+            Book Appointment
           </Link>
           <Link to="/my-appointments" className="hover:text-gray-200 transition">
             My Appointments

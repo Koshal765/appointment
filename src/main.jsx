@@ -6,6 +6,7 @@ import { createBrowserRouter,RouterProvider } from 'react-router'
 import Appointment from './Appointment.jsx'
 import MyAppointments from './MyAppointments.jsx'
 import Login from './Login.jsx'
+import Home from './Home.jsx'
 
 
 
@@ -15,6 +16,10 @@ const appRouter = createBrowserRouter([
     element:<App/>,
     children:[{
       index:true,
+      element:<Home/>
+    },
+    {
+      path:'/book-appointment',
       element:<Appointment/>
     },
     {

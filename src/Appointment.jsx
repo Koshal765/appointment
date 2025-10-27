@@ -1,7 +1,7 @@
-import React, { useEffect, useSyncExternalStore } from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Bounce, Slide, ToastContainer, toast } from 'react-toastify';
-
+import { useLocation } from 'react-router';
 
 const Appointment = () => {
   const [data, setData] = useState({
@@ -19,13 +19,34 @@ const Appointment = () => {
       time: ''
     })
   }
+
+  const location = useLocation();
+
   const [Appointment, SetAppointments] = useState([])
   const [editIndex, SeteditIndex] = useState(null)
 
   useEffect(() => {
     const StoredAppointments = JSON.parse(localStorage.getItem("data")) || [];
     SetAppointments(StoredAppointments)
-  }, [])
+
+    const queryParams = new URLSearchParams(location.search);
+    const serviceParam = queryParams.get('service');
+    const slotParam = queryParams.get('slot');
+
+
+    
+    if (serviceParam && slotParam) {
+      const decodedService = decodeURIComponent(serviceParam);
+  const decodedSlot = decodeURIComponent(slotParam);
+
+  setData(prevData => ({
+    ...prevData,
+    service: decodedService,
+    time: decodedSlot
+
+      }));
+    }
+  }, [location.search]);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
@@ -33,11 +54,26 @@ const Appointment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+  
+    const duplicate = Appointment.some(app =>  app.service === data.service && app.date === data.date && app.time === data.time);
+    if (duplicate) {
+      toast.error("Time slot is already booked.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+    
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
     const StoredAppointments = JSON.parse(localStorage.getItem("data")) || [];
 
     if (editIndex !== null) {
 
-      StoredAppointments[editIndex] = data
+      StoredAppointments[editIndex] = data;
       localStorage.setItem("data", JSON.stringify(StoredAppointments));
       SetAppointments(StoredAppointments)
       SeteditIndex(null);
@@ -98,13 +134,13 @@ const Appointment = () => {
               {/* <label>Select Service</label> */}
               <div>
 
-                <select name='service' value={data.service} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-5 lg:w-100 md:w-80 sm:w-50 px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' required >
+                <select name='service' value={data.service} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-5  w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50 ' required >
                   <option value="" disabled >Select Service</option>
                   <option value="Haircut">Haircut</option>
-                  <option value="Gym">Gym</option>
-                  <option value="Doctor">Doctor</option>
+                  <option value="Gym Training">Gym Training</option>
+                  <option value="Doctor Consultation">Doctor Consultation</option>
                   <option value="Dentist">Dentist</option>
-                  <option value="Spa">Spa</option>
+                  <option value="Spa">Spa </option>
                   <option value="Massage">Massage</option>
                   <option value="Therapy">Therapy</option>
                   <option value="Consultation">Consultation</option>
@@ -126,27 +162,31 @@ const Appointment = () => {
 
                 <select name='time' value={data.time} onChange={handleChange} className='  border-none rounded-2xl shadow-inner pl-5 w-full  px-2 py-2 focus:ring focus:ring-emerald-400   focus:outline-none  focus:bg-cyan-50  ' required >
                   <option value="" disabled>Select Time</option>
-        
+                  <option value="6:00 AM">06:00 AM</option>
+                  <option value="7:00 AM">07:00 AM</option>
+                   <option value="9:00 AM">09:00 AM</option>
+                  <option value="9:30 AM">09:30 AM</option>
                   <option value="10:00 AM">10:00 AM</option>
                   <option value="10:30 AM">10:30 AM</option>
                   <option value="11:00 AM">11:00 AM</option>
                   <option value="11:30 AM">11:30 AM</option>
                   <option value="12:00 PM">12:00 PM</option>
                   <option value="12:30 PM">12:30 PM</option>
-                  
-                  <option value="02:00 PM">02:00 PM</option>
-                  <option value="02:30 PM">02:30 PM</option>
-                  <option value="03:00 PM">03:00 PM</option>
-                  <option value="03:30 PM">03:30 PM</option>
-                  <option value="04:00 PM">04:00 PM</option>
-                  <option value="04:30 PM">04:30 PM</option>
-                  <option value="05:00 PM">05:00 PM</option>
-                  <option value="05:30 PM">05:30 PM</option>
-                  <option value="06:00 PM">06:00 PM</option>
-                  <option value="06:30 PM">06:30 PM</option>
-                  <option value="07:00 PM">07:00 PM</option>
-                  <option value="07:30 PM">07:30 PM</option>
-                  <option value="08:00 PM">08:00 PM</option>
+                  <option value="1:00 PM">01:00 PM</option>
+                  <option value="1:30 PM">01:30 PM</option>
+                   <option value="2:00 PM">02:00 PM</option>
+                  <option value="2:30 PM">02:30 PM</option>
+                  <option value="3:00 PM">03:00 PM</option>
+                  <option value="3:30 PM">03:30 PM</option>
+                  <option value="4:00 PM">04:00 PM</option>
+                  <option value="4:30 PM">04:30 PM</option>
+                  <option value="5:00 PM">05:00 PM</option>
+                  <option value="5:30 PM">05:30 PM</option>
+                  <option value="6:00 PM">06:00 PM</option>
+                  <option value="6:30 PM">06:30 PM</option>
+                  <option value="7:00 PM">07:00 PM</option>
+                  <option value="7:30 PM">07:30 PM</option>
+                  <option value="8:00 PM">08:00 PM</option>
                 </select>
               </div>
             </div>
@@ -216,7 +256,7 @@ const Appointment = () => {
               )))}
         </div>
       </div>
-      <ToastContainer autoClose={2000} theme='dark' transition={Slide} />
+      <ToastContainer autoClose={2000} theme='dark' transition={Slide} closeOnClick:true   draggable:true/>
     </>
   )
 }

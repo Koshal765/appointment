@@ -36,6 +36,8 @@ const handleSubmit=(e)=>{
   if(isLogin){
   const matchedUser = userdata.find(u => u.username.trim().toLowerCase() === user.username.trim().toLowerCase() && u.password.trim().toLowerCase() === user.password.trim().toLowerCase());
   if(matchedUser){
+          localStorage.setItem("loggedUser", JSON.stringify(matchedUser));
+
       Swal.fire({
       title: "Login Successful!",
       text: `Welcome ${matchedUser.username}!`,
@@ -43,7 +45,8 @@ const handleSubmit=(e)=>{
       confirmButtonColor: "#10b981", // emerald color
       theme: "dark"
     });
-    navigate('/');
+    
+    navigate('/my-appointments');
   }
   else{
     alert("Invalid Credentials");
@@ -90,7 +93,7 @@ const redirecting =()=>{
     <>
     <div className='min-h-screen  w-full pt-20 flex justify-center  '>
       {isLogin ?  <>
-    <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-75 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
+    <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-100 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
       <form onSubmit={handleSubmit} className='px-3 mt-5'>
         <h1 className='text-center font-serif text-emerald-500 text-3xl mt-5'>Login</h1>
    
@@ -117,7 +120,7 @@ const redirecting =()=>{
       </form>
       </div>
       </>:<>
-       <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-75 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
+       <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-100 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
       <form onSubmit={handleSubmit} className='px-3 mt-5'>
         <h1 className='text-center font-serif text-emerald-500 text-3xl mt-5'>Sign Up</h1>
    
