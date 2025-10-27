@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -21,6 +22,8 @@ const MyAppointments = () => {
     }
   }, []);
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem('loggedUser');
     setUser(null);
@@ -32,6 +35,11 @@ const MyAppointments = () => {
           confirmButtonColor: "#10b981", // emerald color
           theme: "dark"
         });
+        setTimeout(() => {
+          
+          navigate('/');
+        }, 2000);
+    
   };
  
 
@@ -39,7 +47,7 @@ const MyAppointments = () => {
   return (
     <>
       <div className='min-h-screen  w-full pt-20 flex justify-center'>
-        <div className='w-full max-w-4xl p-6 rounded-lg shadow-2xl mt-4 border-2 border-emerald-200'>
+        <div className='w-full max-w-4xl p-6 rounded-lg shadow-2xl mt-4 border-2 border-emerald-200 '>
           <div>
             <h2 className='text-4xl font-serif mb-6 text-center text-emerald-500'>{users ? `Welcome ${users.username}` : 'Please Login'}</h2>
             </div>

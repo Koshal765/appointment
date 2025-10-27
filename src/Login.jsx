@@ -46,7 +46,10 @@ const handleSubmit=(e)=>{
       theme: "dark"
     });
     
-    navigate('/my-appointments');
+      setTimeout(() => {
+        navigate('/my-appointments');
+      }, 2000);
+   
   }
   else{
     alert("Invalid Credentials");

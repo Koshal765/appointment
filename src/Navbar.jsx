@@ -1,11 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import { FiMenu , FiX } from "react-icons/fi";
+import { useNavigate } from 'react-router';
 
 const Navbar = () => {
 
   const [isOpen,setIsOpen]= useState(false);
   const toggleMenu = () => setIsOpen(!isOpen)
+  const [user , setUser] = useState(true);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedUser')) || null;
+    setUser(loggedInUser);
+  }, []);
+
+const logout=()=>{
+  localStorage.removeItem('loggedUser');
+  setUser(null);
+  setAppointments([]);
+  navigate('/login');
+};
+
+const login=()=>{
+  navigate('/login');
+};
 
 return (
     <nav className="bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 shadow-2xl rounded-b-xl fixed w-full z-50">
@@ -26,9 +46,12 @@ return (
           <Link to="/my-appointments" className="hover:text-gray-200 transition">
             My Appointments
           </Link>
-          <Link to="/login" className="hover:text-gray-200 transition">
-            Login
-          </Link>
+          {user ? (
+            <button className='bg-red-600 text-white rounded-full text-sm px-2 py-1 transition-all hover:scale-105 hover:bg-red-700' onClick={logout}>Logout</button> ): 
+          (
+         <button className=' text-white  transition hover:text-gray-200' onClick={login}>Login</button>
+            
+        )}
        
         </div>
 
