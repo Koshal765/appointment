@@ -35,13 +35,17 @@ const MyAppointments = () => {
           confirmButtonColor: "#10b981", // emerald color
           theme: "dark"
         });
+        
         setTimeout(() => {
-          
           navigate('/');
-        }, 2000);
+          window.location.reload();
+        }, 1000);
     
   };
  
+  const BookAppointment=()=>{
+    navigate('/home');
+  }
 
 
   return (
@@ -76,6 +80,7 @@ const MyAppointments = () => {
                 
               )}
              
+             <div className='flex justify-center lg:justify-start'>  <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full  text-white  hover:from-green-500 hover:to-emerald-600 ' type='button' onClick={BookAppointment}>Book Appointment</button></div>
 
             </div>
              

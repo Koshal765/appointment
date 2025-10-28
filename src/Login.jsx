@@ -45,11 +45,17 @@ const handleSubmit=(e)=>{
       confirmButtonColor: "#10b981", // emerald color
       theme: "dark"
     });
-    
+
+
       setTimeout(() => {
-        navigate('/my-appointments');
-      }, 2000);
-   
+       
+      
+      navigate('/my-appointments')
+       window.location.reload();
+      }, 1500);
+
+      
+  
   }
   else{
     alert("Invalid Credentials");
@@ -89,6 +95,7 @@ const changeform =()=>{
 const redirecting =()=>{
   setIsLogin(!isLogin)
   lognotify();
+  
   
 }
 

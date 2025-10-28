@@ -55,15 +55,15 @@ const Home = () => {
         }
     }, []);
 
-    const handelClick=(serviceName,slot)=>{
+    const handelClick = (serviceName, slot) => {
         navigate(`/book-appointment?service=${encodeURIComponent(serviceName)}&slot=${encodeURIComponent(slot)}`);
 
     }
     return (
         <>
             <div className='min-h-screen  w-full pt-20 '>
-                <h1 className='text-3xl font-bold text-center mt-10 text-emerald-600 font-serif'>Welcome to Appointment Scheduler</h1>
-                <div className="flex justify-around flex-wrap mt-10"  >
+                <h1 className='text-3xl font-bold text-center mt-6 text-emerald-600 font-serif'>Welcome to Appointment Scheduler</h1>
+                <div className="flex justify-around flex-wrap mt-6"  >
                     {services.map((service) => (
                         <div
                             key={service.id}
@@ -81,15 +81,22 @@ const Home = () => {
                                     <span
                                         key={index}
                                         className="px-3 py-1 bg-emerald-500 text-white rounded-full text-sm cursor-context-menu hover:bg-emerald-600 transition-all"
-                                    onClick={()=>handelClick(service.name,slot)}>
+                                        onClick={() => handelClick(service.name, slot)}>
                                         {slot}
                                     </span>
-                                    
+
                                 ))}
+
                             </div>
-                         
+
                         </div>
                     ))}
+                    <div className="w-full flex justify-center mt-10 mb-5">
+                        <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full text-white  hover:from-green-500 hover:to-emerald-600 trasition-all hover:scale-105' onClick={()=>navigate("/book-appointment")} >
+          Book Other Appointments</button>
+                    </div>
+
+
                 </div>
 
             </div>

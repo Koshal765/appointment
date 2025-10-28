@@ -16,15 +16,15 @@ const appRouter = createBrowserRouter([
     element:<App/>,
     children:[{
       index:true,
-      element:<Home/>
+      element:<Login/>
     },
     {
       path:'/book-appointment',
       element:<Appointment/>
     },
     {
-      path:'/login',
-      element:<Login/>
+      path:'/home',
+      element:<Home/>
     },
   {
     path:'/my-appointments',

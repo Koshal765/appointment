@@ -19,26 +19,30 @@ const Navbar = () => {
 const logout=()=>{
   localStorage.removeItem('loggedUser');
   setUser(null);
+   window.location.reload();
   setAppointments([]);
-  navigate('/login');
+ 
+  
+  
 };
 
 const login=()=>{
-  navigate('/login');
+  navigate('/');
+  setIsOpen(false);
 };
 
 return (
     <nav className="bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 shadow-2xl rounded-b-xl fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white "><Link to="/">   Appointment Scheduler</Link>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white "><Link to="/home">   Appointment Scheduler</Link>
        
         </h1>
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-8 text-lg text-white font-serif">
          
-         <Link to="/" className="hover:text-gray-200 transition ">Home</Link>
+         <Link to="/home" className="hover:text-gray-200 transition ">Home</Link>
 
           <Link to="/book-appointment" className="hover:text-gray-200 transition ">
             Book Appointment
@@ -70,9 +74,9 @@ return (
           <ul className="flex flex-col items-center py-4 space-y-4 text-md text-emerald-500 font-serif">
             <li>
               <Link
-                to="/"
+                to="/home"
                 onClick={() => setIsOpen(false)}
-                className="hover:text-gray-200"
+                className="hover:text-emerald-800"
               >
                 Home
               </Link>
@@ -81,7 +85,7 @@ return (
               <Link
                 to="/book-appointment"
                 onClick={() => setIsOpen(false)}
-                className="hover:text-gray-200"
+                className="hover:text-emerald-800"
               >
                 Book Appointments
               </Link>
@@ -90,7 +94,7 @@ return (
               <Link
                 to="/my-appointments"
                 onClick={() => setIsOpen(false)}
-                className="hover:text-gray-200"
+                className="hover:text-emerald-800"
               >
                 My Appointments
               </Link>
@@ -98,13 +102,18 @@ return (
 
 
             <li>
-              <Link
-                to="/login"
+              {/* <Link
+                to="/"
                 onClick={() => setIsOpen(false)}
-                className="hover:text-gray-200"
+                className="hover:text-emerald-800"
               >
                 Login
-              </Link>
+              </Link> */}
+              {user ? (
+            <button className='bg-red-600 text-white rounded-full text-sm px-2 py-1 transition-all hover:scale-105 hover:bg-red-700' onClick={logout}>Logout</button> ): 
+          (
+         <button className=' text-emerald-600  transition hover:text-emerald-900' onClick={login}>Login</button>
+       )}
             </li>
           </ul>
         </div>
