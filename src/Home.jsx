@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 const Home = () => {
     const [services, setServices] = useState([]);
@@ -55,10 +56,46 @@ const Home = () => {
         }
     }, []);
 
+const loggedInUser = JSON.parse(localStorage.getItem('loggedUser')) || null;
+
     const handelClick = (serviceName, slot) => {
+        if (!loggedInUser) {
+        Swal.fire({
+        icon: 'warning',
+        title: 'Login Required',
+        text: 'Please log in to book an appointment.',
+        confirmButtonText: 'Go to Login',
+        theme: "dark"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login');
+        }
+      });
+      return;
+    }
         navigate(`/book-appointment?service=${encodeURIComponent(serviceName)}&slot=${encodeURIComponent(slot)}`);
 
     }
+
+    const handleButtonClick =()=>{
+       if (!loggedInUser) {
+        Swal.fire({
+        icon: 'warning',
+        title: 'Login Required',
+        text: 'Please log in to book an appointment.',
+        confirmButtonText: 'Go to Login',
+        theme: "dark"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login');
+        }
+      });
+      return;
+    }
+ navigate('/book-appointment');
+    }
+    
+
     return (
         <>
             <div className='min-h-screen  w-full pt-20 '>
@@ -92,7 +129,7 @@ const Home = () => {
                         </div>
                     ))}
                     <div className="w-full flex justify-center mt-10 mb-5">
-                        <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full text-white  hover:from-green-500 hover:to-emerald-600 trasition-all hover:scale-105' onClick={()=>navigate("/book-appointment")} >
+                        <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full text-white  hover:from-green-500 hover:to-emerald-600 trasition-all hover:scale-105' onClick={handleButtonClick} >
           Book Other Appointments</button>
                     </div>
 

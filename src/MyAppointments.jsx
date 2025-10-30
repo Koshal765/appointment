@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import Swal from 'sweetalert2';
+ 
 import { useNavigate } from 'react-router';
 
 const MyAppointments = () => {
@@ -22,29 +22,32 @@ const MyAppointments = () => {
     }
   }, []);
 
+  const deleteAppointment = (index) => {
+    if (!window.confirm("Are you sure you want to delete this appointment?")) return;
+    const updatedAppointments = [...userAppointments];
+    updatedAppointments.splice(index, 1);
+    setUserAppointments(updatedAppointments);
+    const allAppointments = appointments.filter(app => app.name.trim().toLowerCase() !== users.username.trim().toLowerCase());
+    const newAppointments = [...allAppointments, ...updatedAppointments];
+    setAppointments(newAppointments);
+    localStorage.setItem('data', JSON.stringify(newAppointments));
+  }
+
+const editAppointment = (index) => {
+    // Implement edit functionality here
+    const appointmentToEdit = userAppointments[index];
+    console.log('Edit appointment:', appointmentToEdit);
+    // You can navigate to the edit page and pass the appointment details
+    navigate('/book-appointment', { state: { appointment: appointmentToEdit,index } });
+
+
+  }
+
+
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('loggedUser');
-    setUser(null);
-    setUserAppointments([]);
-     Swal.fire({
-          title: "Login Successful!",
-          text: `You have been logged out successfully!`,
-          icon: "success",
-          confirmButtonColor: "#10b981", // emerald color
-          theme: "dark"
-        });
-        
-        setTimeout(() => {
-          navigate('/');
-          window.location.reload();
-        }, 1000);
-    
-  };
- 
   const BookAppointment=()=>{
-    navigate('/home');
+    navigate('/');
   }
 
 
@@ -69,18 +72,21 @@ const MyAppointments = () => {
                     <p className='text-2xl font-serif text-emerald-500 mb-3'><strong>{app.service}</strong></p>
                     <p className='font-serif '><strong>Date:</strong> {app.date}</p>
                     <p className='font-serif'><strong>Time:</strong> {app.time}</p>
+                    <div className='flex justify-start gap-2 mt-3 text-sm lg:justify-end lg:text-base '>
+                      <button className='bg-red-500 text-white font-semibold px-3 py-1 rounded-2xl hover:bg-red-700' onClick={() => deleteAppointment(index)}>Delete</button>
+                      <button className=' bg-emerald-600 text-white font-semibold px-4 py-1 rounded-2xl hover:bg-emerald-400' onClick={() => editAppointment(index)}>Edit </button>
+                    </div>
                   </div>
                   
+                  
                 ))}
-               
-                   <div className='flex justify-end mt-6'>
-            <button className='mt-5  rounded-full px-3 py-1 font-serif bg-red-600 text-white hover:bg-red-700 transition-all hover:scale-105' onClick={handleLogout}>Logout</button>
-            </div>
+                
+                
               </>
                 
               )}
              
-             <div className='flex justify-center lg:justify-start'>  <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full  text-white  hover:from-green-500 hover:to-emerald-600 ' type='button' onClick={BookAppointment}>Book Appointment</button></div>
+             <div className='flex justify-center lg:justify-start mt-8 '>  <button className='bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 px-4 py-2 font-serif text-center rounded-full  text-white  hover:from-green-500 hover:to-emerald-600 transition-all hover:scale-105' type='button' onClick={BookAppointment}>Book Appointment</button></div>
 
             </div>
              

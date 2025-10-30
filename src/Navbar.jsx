@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 import { FiMenu , FiX } from "react-icons/fi";
 import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
 
   const [isOpen,setIsOpen]= useState(false);
   const toggleMenu = () => setIsOpen(!isOpen)
-  const [user , setUser] = useState(true);
+  const [user , setUser] = useState(null);
 
   const navigate = useNavigate();
 
@@ -19,30 +20,42 @@ const Navbar = () => {
 const logout=()=>{
   localStorage.removeItem('loggedUser');
   setUser(null);
-   window.location.reload();
-  setAppointments([]);
- 
+  setIsOpen(false); 
+
+Swal.fire({
+    icon: 'success',
+    title: 'Logged out successfully',
+    text: 'Redirecting to login page...',
+    showConfirmButton: false,
+    timer:2000,
+    theme: "dark"
+  }).then(() => {
+    // This runs AFTER the popup closes
+    navigate('/login');
+  });
+
   
-  
+
 };
 
 const login=()=>{
-  navigate('/');
+  navigate('/login');
   setIsOpen(false);
 };
+
 
 return (
     <nav className="bg-gradient-to-r from-emerald-500 via-teal-500 to-green-400 shadow-2xl rounded-b-xl fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white "><Link to="/home">   Appointment Scheduler</Link>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-white "><Link to="/">   Appointment Scheduler</Link>
        
         </h1>
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-8 text-lg text-white font-serif">
          
-         <Link to="/home" className="hover:text-gray-200 transition ">Home</Link>
+         <Link to="/" className="hover:text-gray-200 transition ">Home</Link>
 
           <Link to="/book-appointment" className="hover:text-gray-200 transition ">
             Book Appointment
@@ -74,7 +87,7 @@ return (
           <ul className="flex flex-col items-center py-4 space-y-4 text-md text-emerald-500 font-serif">
             <li>
               <Link
-                to="/home"
+                to="/"
                 onClick={() => setIsOpen(false)}
                 className="hover:text-emerald-800"
               >

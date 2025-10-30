@@ -6,6 +6,8 @@ import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 
 const Login = () => {
+  const navigate = useNavigate()
+  
   const[isLogin,setIsLogin] = useState(false);
   const[user,setUser]=useState({
     username:'',
@@ -19,17 +21,18 @@ const Login = () => {
     })
   }
 
-  const[showpass,setShowPass] = useState(true);
-  const handleClick =()=>setShowPass(!showpass);
-
+  const[hidepass,setHidePass] = useState(true);
+  const handleClick =()=>setHidePass(!hidepass);
+  
 
   const notify = () =>toast.info("Username Already Exists ! Redirecting to Login ")
    const lognotify = () =>toast.info("Please Login ")
-  const navigate = useNavigate()
+
 
 const handleChange =(e)=>{
   setUser({...user,[e.target.name]:e.target.value})
 }
+
 const handleSubmit=(e)=>{
   e.preventDefault();
   const userdata = JSON.parse(localStorage.getItem("users")) || [];
@@ -44,18 +47,17 @@ const handleSubmit=(e)=>{
       icon: "success",
       confirmButtonColor: "#10b981", // emerald color
       theme: "dark"
+      
+    }).then((result)=>{
+      if(result.isConfirmed){
+        navigate('/my-appointments');
+        window.location.reload();
+      }
     });
-
-
-      setTimeout(() => {
-       
-      
-      navigate('/my-appointments')
-       window.location.reload();
-      }, 1500);
-
-      
-  
+      // setTimeout(() => {
+      //    navigate('/my-appointments')
+      //  window.location.reload();
+      // },2500);
   }
   else{
     alert("Invalid Credentials");
@@ -64,8 +66,7 @@ const handleSubmit=(e)=>{
     const exists = userdata.some((u)=>u.username=== user.username);
     if(exists){
       notify()
-      
-      setTimeout(()=>{redirecting();},2500);
+       setTimeout(()=>{redirecting();},2500);
      
     }
     else{
@@ -94,16 +95,14 @@ const changeform =()=>{
 
 const redirecting =()=>{
   setIsLogin(!isLogin)
-  lognotify();
-  
-  
+  lognotify(); 
 }
 
   return (
     <>
     <div className='min-h-screen  w-full pt-20 flex justify-center  '>
       {isLogin ?  <>
-    <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-100 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
+    <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-75 lg:w-100 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
       <form onSubmit={handleSubmit} className='px-3 mt-5'>
         <h1 className='text-center font-serif text-emerald-500 text-3xl mt-5'>Login</h1>
    
@@ -116,8 +115,8 @@ const redirecting =()=>{
           {/* <label className=' font-serif'>Password</label> */}
           <div className='mt-5'>
             <div className='flex items-center border rounded-full focus-within:border-emerald-400 outline-none justify-around'>
-            <input name='password' type={showpass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none  px-3 py-1' placeholder='password'></input>
-           <span onClick={handleClick} className='mr-2'>{showpass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
+            <input name='password' type={hidepass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none  px-3 py-1' placeholder='password'></input>
+           <span onClick={handleClick} className='mr-2'>{hidepass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
           </div></div>
         
        
@@ -130,7 +129,7 @@ const redirecting =()=>{
       </form>
       </div>
       </>:<>
-       <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-100 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
+       <div className='border-emerald-400 bg-white border  rounded-2xl shadow-xl w-75 lg:w-100 h-100 flex justify-center  mt-15  transition-all hover:shadow-emerald-400/80 hover:scale-101 '>
       <form onSubmit={handleSubmit} className='px-3 mt-5'>
         <h1 className='text-center font-serif text-emerald-500 text-3xl mt-5'>Sign Up</h1>
    
@@ -143,8 +142,8 @@ const redirecting =()=>{
           {/* <label className=' font-serif'>Password</label> */}
          <div className='mt-5'>
             <div className='flex items-center border rounded-full focus-within:border-emerald-400 outline-none justify-around'>
-            <input name='password' type={showpass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none px-3 py-1' placeholder='password'></input>
-           <span onClick={handleClick} className='mr-2'>{showpass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
+            <input name='password' type={hidepass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none px-3 py-1' placeholder='password'></input>
+           <span onClick={handleClick} className='mr-2'>{hidepass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
           </div></div>
         
   
@@ -160,10 +159,7 @@ const redirecting =()=>{
       
       </>}
       </div>
-      <ToastContainer 
-      autoClose={2000}
-      transition={Slide}
-      theme='dark'/>
+      <ToastContainer autoClose={2000} transition={Slide} theme='dark'/>
     </>
   )
 }

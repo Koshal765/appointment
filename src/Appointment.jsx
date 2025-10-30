@@ -20,7 +20,8 @@ const Appointment = () => {
     })
   }
 
-  const location = useLocation();
+  const location = useLocation();//to read query params
+ 
 
   const [Appointment, SetAppointments] = useState([])
   const [editIndex, SeteditIndex] = useState(null)
@@ -33,8 +34,6 @@ const Appointment = () => {
     const serviceParam = queryParams.get('service');
     const slotParam = queryParams.get('slot');
 
-
-    
     if (serviceParam && slotParam) {
       const decodedService = decodeURIComponent(serviceParam);
   const decodedSlot = decodeURIComponent(slotParam);
@@ -47,6 +46,20 @@ const Appointment = () => {
       }));
     }
   }, [location.search]);
+
+
+ const { appointment,index } = location.state || {};
+  useEffect(() => {
+if(appointment){
+  setData({
+    name: appointment.name || '',
+    service: appointment.service || '',
+    date: appointment.date || '',
+    time: appointment.time|| ''
+  });
+SeteditIndex (index ?? null);  //?? is called nullish coalescing operator 
+}
+  },[appointment,index]);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
@@ -108,19 +121,21 @@ const Appointment = () => {
   const Edit = (index) => {
     const StoredAppointments = JSON.parse(localStorage.getItem("data")) || [];
     const selected = StoredAppointments[index];
-    setData(selected)
-    SeteditIndex(index);
+    setData(selected) //
+    SeteditIndex(index); // 
+    const form = document.getElementById('form');
+    form.scrollIntoView({ behavior: 'smooth' });
   }
 
 
-  const notify = () => toast.success("Appointmnet Saved Succesfully")
-  const deletenotify = () => toast.success("Appointment Deleted Succesfully")
+  const notify = () => toast.success("Appointment Saved Successfully")
+  const deletenotify = () => toast.success("Appointment Deleted Successfully")
   const editnotify = () => toast.info("Appointment Updated Succesfully")
 
   return (
     <>
-      <div className='flex justify-center w-full '>
-        <div className='bg-orange-50 lg:w-120 md:w-100 sm:w-80 mt-25  px-10 py-4 rounded-2xl shadow-2xl mb-5 flex justify-center hover:shadow-emerald-500/100 transition-all hover:scale-101 '>
+      <div className='flex justify-center w-full ' id='form'>
+        <div className='bg-orange-50 lg:w-120 md:w-100 sm:w-80 mt-25  px-10 py-4 rounded-2xl shadow-2xl mb-5 flex justify-center hover:shadow-emerald-500/100 transition-all hover:scale-101 ' >
           <form onSubmit={handleSubmit}>
             <h1 className='text-center text-emerald-600 font-serif text-xl md:text-2xl lg:2xl'>Book Appointment </h1>
             <div className='mt-5'>
@@ -205,39 +220,7 @@ const Appointment = () => {
       </div>
       <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto ' id='appointments'>
         <h1 className='lg:text-2xl md:text-xl sm:text-lg font-semibold text-emerald-600 font-serif text-center'>Appointments</h1>
-        {/* <div className='overflow-x-auto'>
-    <table className='min-w-full mt-5 border-separate border-2 border-emerald-600 md:table-auto sm: col-span-2 '> 
-        <thead>
-            <tr className='border-2 border-gray-500'>
-                <th className='border border-gray-300 px-4 py-2 text-xl'>Name</th>
-                <th className='border border-gray-300 px-4 py-2 text-xl'>Service</th>
-                <th className='border border-gray-300 px-4 py-2 text-xl'>Date</th>
-                <th className='border border-gray-300 px-4 py-2 text-xl'>Time</th>
-                <th className='border border-gray-300 px-4 py-2 text-xl'>Action</th>
-            
-            </tr>
-        </thead>
-        <tbody>
-            {Appointment.map((app, index) => (
-                <tr key={index} >    
-                    <td className='border border-gray-300 px-4 py-2 text-center'>{app.name}</td>
-                    <td className='border border-gray-300 px-4 py-2 text-center'>{app.service}</td>
-                  
-                    <td className='border border-gray-300 px-4 py-2 text-center'>{app.date}</td>
-                    <td className='border border-gray-300 px-4 py-2 text-center'>{app.time}</td>
-                    <td className='border border-gray-300 px-4 py-2 '>
-                      <div className=' flex justify-around'>
-                        <button className='bg-red-500 text-white font-semibold px-3 py-1 rounded-2xl hover:bg-red-700'onClick={()=>Delete(index)}>Delete</button>
-                    <button className=' bg-emerald-600 text-white font-semibold px-4 py-1 rounded-2xl hover:bg-emerald-400' onClick={()=>Edit(index)}>Edit</button>
-                    </div>
-                    </td>
-                   </tr>
-                
-            ))}
-        </tbody>
-    </table>
-
-    </div> */}<div className='flex justify-center flex-wrap gap-5 mt-5'>
+       <div className='flex justify-center flex-wrap gap-5 mt-5'>
 
           {Appointment.length === 0 ?
             (<p className='text-center font-serif text-emerald-600 lg:text-xl md:text-lg sm:text-md'>No Appointments Scheduled</p>
