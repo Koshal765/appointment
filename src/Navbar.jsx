@@ -39,7 +39,7 @@ Swal.fire({
 };
 
 const login=()=>{
-  navigate('/login');
+  navigate('/');
   setIsOpen(false);
 };
 
