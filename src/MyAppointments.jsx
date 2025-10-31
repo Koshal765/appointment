@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { RiServiceLine } from "react-icons/ri";
  
 import { useNavigate } from 'react-router';
 
@@ -50,38 +51,47 @@ const editAppointment = (index) => {
     navigate('/');
   }
 
+  const current = new Date();
+  const date= current.toLocaleDateString();
+  const time = current.toLocaleTimeString();
+
 
   return (
     <>
       <div className='min-h-screen  w-full pt-20 flex justify-center'>
-        <div className='w-full max-w-4xl p-6 rounded-lg shadow-2xl mt-4 border-2 border-emerald-200 '>
+        <div className='w-full max-w-6xl p-6 rounded-lg shadow-2xl mt-4 border-2 border-emerald-200 '>
           <div>
             <h2 className='text-4xl font-serif mb-6 text-center text-emerald-500'>{users ? `Welcome ${users.username}` : 'Please Login'}</h2>
             </div>
           <div>
            
-            <div className='mt-5 space-y-4 '>
+            <div className='mt-5 space-y-4  '>
+              
               {userAppointments.length === 0 ? (
                 <p className='font-serif text-2xl'>No appointments found.</p>
               ) : (
                 <>
                  <p className='text-xl font-serif mb-4'>
             Here are your appointments:</p>
+            <div className='flex justify-around flex-wrap gap-5 '>
                 {userAppointments.map((app, index) => (
-                  <div key={index} className='p-4 rounded-lg shadow-md border border-emerald-500 mt-5'>
-                    <p className='text-2xl font-serif text-emerald-500 mb-3'><strong>{app.service}</strong></p>
+                  <div key={index} className='p-4 rounded-2xl shadow-md border border-emerald-500 mt-5 w-80  hover:shadow-emerald-400/100 hover:scale-105 transition-all bg-gray-50 hover:border-2'>
+                    <p className='text-2xl font-serif text-emerald-500 mb-3 flex items-center gap-2'><RiServiceLine size={20} className='text-emerald-900'/><strong>{app.service}</strong></p>
                     <p className='font-serif '><strong>Date:</strong> {app.date}</p>
                     <p className='font-serif'><strong>Time:</strong> {app.time}</p>
-                    <div className='flex justify-start gap-2 mt-3 text-sm lg:justify-end lg:text-base '>
+                 
+                    <div className='flex justify-start gap-2 mt-3 text-sm lg:text-base '>
                       <button className='bg-red-500 text-white font-semibold px-3 py-1 rounded-2xl hover:bg-red-700' onClick={() => deleteAppointment(index)}>Delete</button>
                       <button className=' bg-emerald-600 text-white font-semibold px-4 py-1 rounded-2xl hover:bg-emerald-400' onClick={() => editAppointment(index)}>Edit </button>
-                    </div>
+                    </div>   <div className='bg-emerald-700 w-full h-0.5 mt-3'></div>
+                    <p className='font-serif text-gray-500 mt-3'><span className='text-emerald-500'>Booked on:</span>{date} at:{time}</p>
                   </div>
                   
                   
                 ))}
+
                 
-                
+                </div>
               </>
                 
               )}

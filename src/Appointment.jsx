@@ -2,6 +2,12 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Bounce, Slide, ToastContainer, toast } from 'react-toastify';
 import { useLocation } from 'react-router';
+import { GoPerson } from "react-icons/go";
+import { RiServiceLine } from "react-icons/ri";
+import { MdDateRange } from "react-icons/md";
+import { IoMdTime } from "react-icons/io";
+
+
 
 const Appointment = () => {
   const [data, setData] = useState({
@@ -132,6 +138,11 @@ SeteditIndex (index ?? null);  //?? is called nullish coalescing operator
   const deletenotify = () => toast.success("Appointment Deleted Successfully")
   const editnotify = () => toast.info("Appointment Updated Succesfully")
 
+  const current= new Date();
+  const date = current.toLocaleDateString();
+  const time = current.toLocaleTimeString();
+
+
   return (
     <>
       <div className='flex justify-center w-full ' id='form'>
@@ -226,14 +237,17 @@ SeteditIndex (index ?? null);  //?? is called nullish coalescing operator
             (<p className='text-center font-serif text-emerald-600 lg:text-xl md:text-lg sm:text-md'>No Appointments Scheduled</p>
             ) : (
               Appointment.map((app, index) => (
-                <div key={index} className='border-2 w-75 h-auto bg-gray-50 border-emerald-400 rounded-2xl shadow-lg p-5 my-4 hover:shadow-emerald-400/50 transition-all text-start hover:scale-105'>
-                  <h2 className='font-serif font-semibold text-emerald-600 lg:text-3xl md:text-lg sm:text-md py-2'> {app.name}</h2>
-                  <p className='font-serif lg:text-lg md:text-lg sm:text-md  '>Service: {app.service}</p>
-                  <p className='font-serif lg:text-lg md:text-lg sm:text-md '>Date: {app.date}</p>
-                  <p className='font-serif lg:text-lg md:text-lg sm:text-md '>Time: {app.time}</p>
-                  <div className='flex justify-start gap-4 mt-2 '>
-                    <button className='bg-red-500 text-white font-semibold px-3 py-1 rounded-2xl hover:bg-red-700' onClick={() => Delete(index)}>Delete</button>
-                    <button className=' bg-emerald-600 text-white font-semibold px-4 py-1 rounded-2xl hover:bg-emerald-400' onClick={() => Edit(index)}>Edit</button>
+                <div key={index} className='border-2 w-85 h-auto bg-gray-50 border-emerald-400 rounded-2xl shadow-lg p-5 my-4 hover:shadow-emerald-400/50 transition-all text-start hover:scale-105'>
+<h2 className='font-serif font-semibold text-emerald-600 lg:text-3xl md:text-lg sm:text-md py-2 flex gap-2 mb-4'><GoPerson /> {app.name}</h2>
+                  <p className='font-serif lg:text-lg md:text-lg sm:text-md flex gap-2 items-center mb-1'><RiServiceLine size={20} className='text-emerald-900'/>Service: {app.service}</p>
+                  <p className='font-serif lg:text-lg md:text-lg sm:text-md flex gap-2 items-center mb-1'> <MdDateRange className='text-emerald-900'/>Date: {app.date}</p>
+                  <p className='font-serif lg:text-lg md:text-lg sm:text-md flex gap-2 items-center'><IoMdTime className='text-emerald-900' />Time: {app.time}</p>
+                 <div className='w-full bg-emerald-600 h-0.5 mt-4'></div>
+                  <div className=' mt-2 '>
+                    <p className='font-serif text-sm text-emerald-700 '>Booked on: <span className='text-gray-500'>{date} at {time}</span>  </p> 
+
+                    {/* <button className='bg-red-500 text-white font-semibold px-3 py-1 rounded-2xl hover:bg-red-700' onClick={() => Delete(index)}>Delete</button>
+                    <button className=' bg-emerald-600 text-white font-semibold px-4 py-1 rounded-2xl hover:bg-emerald-400' onClick={() => Edit(index)}>Edit</button> */}
                   </div>
                 </div>
               )))}

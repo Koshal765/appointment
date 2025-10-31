@@ -2,6 +2,9 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { RiServiceLine } from "react-icons/ri";
+import { MdOutlineDescription } from "react-icons/md";
+
 
 const Home = () => {
     const [services, setServices] = useState([]);
@@ -104,12 +107,12 @@ const loggedInUser = JSON.parse(localStorage.getItem('loggedUser')) || null;
                     {services.map((service) => (
                         <div
                             key={service.id}
-                            className="bg-white shadow-lg rounded-2xl p-5 border border-emerald-200 hover:shadow-2xl transition-all w-75 sm:w-75 md:w-75 lg:w-100 ml-3 mt-4  transform-all hover:scale-105"
+                            className="bg-white shadow-lg rounded-2xl p-5 border border-emerald-200 hover:shadow-2xl transition-all w-70 sm:w-75 md:w-75 lg:w-100 ml-3 mt-4  transform-all hover:scale-105 hover:border-2 hover:border-emerald-400"
                         >
-                            <h2 className="text-xl font-semibold text-emerald-600">
-                                {service.name}
+                            <h2 className="text-xl font-semibold text-emerald-600 flex gap-2 items-center">
+                               <RiServiceLine size={20} className='text-emerald-900'/> {service.name}
                             </h2>
-                            <p className="text-gray-600 text-sm mt-2">{service.description}</p>
+                            <p className="text-gray-600 text-sm mt-2 flex gap-2 items-center"><MdOutlineDescription className='text-emerald-900' size={20}/>{service.description}</p>
 
 
                             <h3 className="mt-4 text-emerald-700 font-medium">Available Slots:</h3>
@@ -117,7 +120,7 @@ const loggedInUser = JSON.parse(localStorage.getItem('loggedUser')) || null;
                                 {service.slots.map((slot, index) => (
                                     <span
                                         key={index}
-                                        className="px-3 py-1 bg-emerald-500 text-white rounded-full text-sm cursor-context-menu hover:bg-emerald-600 transition-all"
+                                        className="px-3 py-1 bg-emerald-500 text-white rounded-full text-sm cursor-pointer hover:bg-emerald-600 transition-all"
                                         onClick={() => handelClick(service.name, slot)}>
                                         {slot}
                                     </span>
