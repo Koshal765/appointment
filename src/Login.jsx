@@ -116,7 +116,7 @@ const redirecting =()=>{
           <div className='mt-5'>
             <div className='flex items-center border rounded-full focus-within:border-emerald-400 outline-none justify-around'>
             <input name='password' type={hidepass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none  px-3 py-1' placeholder='password'></input>
-           <span onClick={handleClick} className='mr-2'>{hidepass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
+           <span onClick={handleClick} className='mr-2 text-emerald-900' role='button'>{hidepass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
           </div></div>
         
        
@@ -143,7 +143,7 @@ const redirecting =()=>{
          <div className='mt-5'>
             <div className='flex items-center border rounded-full focus-within:border-emerald-400 outline-none justify-around'>
             <input name='password' type={hidepass?"password":"text"} value={user.password} onChange={handleChange} required autoComplete='off' className=' rounded-full w-full focus:border-emerald-400  outline-none px-3 py-1' placeholder='password'></input>
-           <span onClick={handleClick} className='mr-2'>{hidepass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
+           <span onClick={handleClick} className='mr-2 text-emerald-900'role='button'>{hidepass? <IoEyeOff size={15} />:<IoEye size={15}/>}</span>
           </div></div>
         
   

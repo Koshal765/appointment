@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { RiServiceLine } from "react-icons/ri";
+import { toast ,ToastContainer,Slide} from 'react-toastify';
  
 import { useNavigate } from 'react-router';
 
@@ -32,14 +33,23 @@ const MyAppointments = () => {
     const newAppointments = [...allAppointments, ...updatedAppointments];
     setAppointments(newAppointments);
     localStorage.setItem('data', JSON.stringify(newAppointments));
+    deletenotify();
   }
 
 const editAppointment = (index) => {
     // Implement edit functionality here
     const appointmentToEdit = userAppointments[index];
+     const globalIndex = appointments.findIndex(
+    (app) =>
+      app.name.trim().toLowerCase() === appointmentToEdit.name.trim().toLowerCase() &&
+      app.service === appointmentToEdit.service &&
+      app.date === appointmentToEdit.date &&
+      app.time === appointmentToEdit.time
+  );
+
     console.log('Edit appointment:', appointmentToEdit);
     // You can navigate to the edit page and pass the appointment details
-    navigate('/book-appointment', { state: { appointment: appointmentToEdit,index } });
+    navigate('/book-appointment', { state: { appointment: appointmentToEdit,index: globalIndex } });
 
 
   }
@@ -55,6 +65,7 @@ const editAppointment = (index) => {
   const date= current.toLocaleDateString();
   const time = current.toLocaleTimeString();
 
+  const deletenotify = () => toast.success("Appointment Deleted Successfully")
 
   return (
     <>
@@ -104,7 +115,9 @@ const editAppointment = (index) => {
            
           </div>
         </div>
-      </div>
+        
+      </div> 
+       <ToastContainer autoClose={2000} theme='dark' transition={Slide} closeOnClick:true   draggable:true/>
       </>
       )
 }

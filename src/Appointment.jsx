@@ -113,29 +113,29 @@ SeteditIndex (index ?? null);  //?? is called nullish coalescing operator
 
   }
 
-  const Delete = (index) => {
-    if (window.confirm("Do you want to delete this?")) {
-      const StoredAppointments = JSON.parse(localStorage.getItem("data")) || [];
-      StoredAppointments.splice(index, 1)
-      localStorage.setItem("data", JSON.stringify(StoredAppointments))
-      SetAppointments(StoredAppointments);
-      deletenotify();
-    }
+  // const Delete = (index) => {
+  //   if (window.confirm("Do you want to delete this?")) {
+  //     const StoredAppointments = JSON.parse(localStorage.getItem("data")) || [];
+  //     StoredAppointments.splice(index, 1)
+  //     localStorage.setItem("data", JSON.stringify(StoredAppointments))
+  //     SetAppointments(StoredAppointments);
+  //     deletenotify();
+  //   }
 
-  }
+  // }
 
-  const Edit = (index) => {
-    const StoredAppointments = JSON.parse(localStorage.getItem("data")) || [];
-    const selected = StoredAppointments[index];
-    setData(selected) //
-    SeteditIndex(index); // 
-    const form = document.getElementById('form');
-    form.scrollIntoView({ behavior: 'smooth' });
-  }
+  // const Edit = (index) => {
+  //   const StoredAppointments = JSON.parse(localStorage.getItem("data")) || [];
+  //   const selected = StoredAppointments[index];
+  //   setData(selected) //
+  //   SeteditIndex(index); // 
+  //   const form = document.getElementById('form');
+  //   form.scrollIntoView({ behavior: 'smooth' });
+  // }
 
 
   const notify = () => toast.success("Appointment Saved Successfully")
-  const deletenotify = () => toast.success("Appointment Deleted Successfully")
+  // const deletenotify = () => toast.success("Appointment Deleted Successfully")
   const editnotify = () => toast.info("Appointment Updated Succesfully")
 
   const current= new Date();
@@ -229,9 +229,9 @@ SeteditIndex (index ?? null);  //?? is called nullish coalescing operator
 
 
       </div>
-      <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto ' id='appointments'>
+      <div className='p-5 m-5 shadow-xl/30 rounded-lg w-fu h-auto '>
         <h1 className='lg:text-2xl md:text-xl sm:text-lg font-semibold text-emerald-600 font-serif text-center'>Appointments</h1>
-       <div className='flex justify-center flex-wrap gap-5 mt-5'>
+       <div className='flex justify-center flex-wrap gap-5 mt-5' id='appointments'>
 
           {Appointment.length === 0 ?
             (<p className='text-center font-serif text-emerald-600 lg:text-xl md:text-lg sm:text-md'>No Appointments Scheduled</p>
